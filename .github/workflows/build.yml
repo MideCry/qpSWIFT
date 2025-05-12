@@ -37,9 +37,13 @@ jobs:
         cd python
         python3 -m build --wheel -n
 
+    - name: Setup upload
+      run: |
+        pwd
+
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/
         user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
