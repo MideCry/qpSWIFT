@@ -37,9 +37,13 @@ jobs:
         cd python
         python3 -m build --wheel -n
 
-    - name: Setup upload
+    - name: Repair wheel
       run: |
-        pwd
+        mkdir -p dist
+        cd python
+        auditwheel repair dist/*.whl
+        rm dist/*.whl
+        mv wheelhouse/*.whl ../dist/
 
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@release/v1
